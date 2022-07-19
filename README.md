@@ -1,4 +1,4 @@
-# django-ORM-Queryset
+# Django-ORM-Queryset
 
 ### Field Lookups Reference
 A list of all field look up keywords:
