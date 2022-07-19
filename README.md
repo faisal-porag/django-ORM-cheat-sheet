@@ -35,3 +35,26 @@ week_day |	Matches a day of week (1-7) 1 is sunday
 iso_week_day |	Matches a ISO 8601 day of week (1-7) 1 is monday
 year |	Matches a year (for dates)
 iso_year |	Matches an ISO 8601 year (for dates)
+
+
+#### ORM Example 
+Return the records where firstname starts with the letter 'L':
+```shell
+mydata = Members.objects.filter(firstname__startswith='L').values()
+```
+#### SQL EXAMPE
+```shell
+SELECT * FROM members WHERE firstname LIKE 'L%';
+```
+
+
+
+
+
+
+
+
+
+
+
+
