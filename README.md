@@ -1,5 +1,15 @@
 # Django-ORM-Queryset
 
+#### ORM OR Example
+Return records where firstname is either "Emil" or Tobias":
+```shell
+mydata = Members.objects.filter(firstname='Emil').values() | Members.objects.filter(firstname='Tobias').values()
+```
+#### SQL OR Example
+```shell
+SELECT * FROM members WHERE   firstname = 'Emil' OR firstname = 'Tobias';
+```
+
 ### Field Lookups Reference
 A list of all field look up keywords:
 
