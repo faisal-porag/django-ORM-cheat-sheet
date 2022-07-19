@@ -1,5 +1,29 @@
 # Django-ORM-Queryset
 
+#### ORM Sample Filter Example
+Return only the records where the firstname is 'Emil':
+```shell
+mydata = Members.objects.filter(firstname='Emil').values()
+```
+#### In SQL 
+```shell
+SELECT * FROM members WHERE firstname = 'Emil';
+```
+
+---
+
+#### ORM Sample Filter Example 2
+Return only the records where the firstname is 'Emil':
+```shell
+mydata = Members.objects.filter(firstname='Emil').values(id, firstname, lastname)
+```
+#### In SQL 2
+```shell
+SELECT id, firstname, lastname FROM members WHERE firstname = 'Emil';
+```
+
+---
+
 #### ORM AND Example
 Return records where lastname is "Refsnes" and id is 2:
 ```shell
