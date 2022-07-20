@@ -5,7 +5,7 @@ Return only the records where the firstname is 'Emil':
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values()
 ```
-#### In SQL 
+#### SQL Example
 ```shell
 SELECT * FROM members WHERE firstname = 'Emil';
 ```
@@ -17,31 +17,31 @@ Return only the records where the firstname is 'Emil':
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values(id, firstname, lastname)
 ```
-#### In SQL 2
+#### SQL Example 2
 ```shell
 SELECT id, firstname, lastname FROM members WHERE firstname = 'Emil';
 ```
 
 ---
 
-#### ORM AND Example
+#### ORM `AND` Example
 Return records where lastname is "Refsnes" and id is 2:
 ```shell
 mydata = Members.objects.filter(lastname='Refsnes', id=2).values()
 ```
-#### SQL AND Example
+#### SQL `AND` Example
 ```shell
 SELECT * FROM members WHERE lastname='Refsnes' AND id = 2;
 ```
 
 ---
 
-#### ORM OR Example
+#### ORM `OR` Example
 Return records where firstname is either "Emil" or Tobias":
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values() | Members.objects.filter(firstname='Tobias').values()
 ```
-#### SQL OR Example
+#### SQL `OR` Example
 ```shell
 SELECT * FROM members WHERE   firstname = 'Emil' OR firstname = 'Tobias';
 ```
