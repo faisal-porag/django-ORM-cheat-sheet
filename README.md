@@ -104,6 +104,38 @@ mydata = Members..objects.filter(pk__in=[1, 4, 7])
 ```shell
 SELECT * FROM members WHERE id in (1, 4, 7);
 ```
+---
+
+#### Date range example 
+```shell
+from datetime import date, timedelta
+startdate = date.today()
+enddate = startdate + timedelta(days=6)
+Sample.objects.filter(date__range=[startdate, enddate])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
