@@ -96,7 +96,14 @@ SELECT * FROM members WHERE firstname LIKE 'L%';
 ```
 ---
 
-
+#### ORM Example `(IN)`
+```shell
+mydata = Members..objects.filter(pk__in=[1, 4, 7])
+```
+#### SQL `IN` EXAMPE
+```shell
+SELECT * FROM members WHERE id in (1, 4, 7);
+```
 
 
 
