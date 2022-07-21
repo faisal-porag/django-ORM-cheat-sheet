@@ -114,7 +114,14 @@ enddate = startdate + timedelta(days=6)
 Sample.objects.filter(date__range=[startdate, enddate])
 ```
 
+#### GET data from last 90 days - ORM Example
+```shell
+last_90_days = timezone.now() - timedelta(days=90)
 
+mydata = Members.objects.filter(
+    initiated_at__gte=last_90_days
+).order_by('-initiated_at').values('firstname')
+```
 
 
 
