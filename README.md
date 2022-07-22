@@ -123,6 +123,18 @@ mydata = Members.objects.filter(
 ).order_by('-initiated_at').values('firstname')
 ```
 
+---
+
+### UPDATE ORM EXAMPLE 
+
+#### Update all the headlines with pub_date in 2007.
+```shell
+News.objects.filter(pub_date__year=2007).update(headline='Everything is the same')
+```
+
+```shell
+User.objects.filter(last_login=None).update(is_active=False)
+```
 
 
 
