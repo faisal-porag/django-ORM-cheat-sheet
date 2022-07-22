@@ -144,7 +144,17 @@ mydata = Members.objects.all().order_by('firstname').values()
 ```shell
 mydata = Members.objects.all().order_by('-firstname').values()
 ```
+---
 
+#### Example of Order the the result first by lastname ascending, then descending on id:
+```shell
+mydata = Members.objects.all().order_by('lastname', '-id').values()
+```
+##### In SQL, the above statement would be written like this:
+```shell
+SELECT * FROM members ORDER BY lastname ASC, id DESC;
+```
+---
 
 
 
