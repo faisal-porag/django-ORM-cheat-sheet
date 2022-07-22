@@ -136,6 +136,15 @@ News.objects.filter(pub_date__year=2007).update(headline='Everything is the same
 User.objects.filter(last_login=None).update(is_active=False)
 ```
 
+#### Order by ASC (Order the the result alphabetically by firstname)
+```shell
+mydata = Members.objects.all().order_by('firstname').values()
+```
+#### Order by DESC (Order the the result firstname descending)
+```shell
+mydata = Members.objects.all().order_by('-firstname').values()
+```
+
 
 
 
