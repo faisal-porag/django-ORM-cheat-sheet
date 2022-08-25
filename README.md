@@ -160,9 +160,16 @@ SELECT * FROM members ORDER BY lastname ASC, id DESC;
 
 
 
+class Question(models.Model):
+      title = models.CharField(max_length=70)
+      details = models.TextField()
 
-
-
+    class Answer(models.Model):
+      question = models.ForeignKey('Question')
+      details = models.TextField()
+      
+//JOIN QUERY
+answers = Answer.objects.filter(question_id=1).select_related()
 
 
 
