@@ -172,6 +172,11 @@ class Question(models.Model):
 answers = Answer.objects.filter(question_id=1).select_related()
 
 
+// SUM 
+from django.db.models import Sum
+
+ItemPrice.objects.aggregate(Sum('price'))
+# returns {'price__sum': 1000} for example
 
 
 
