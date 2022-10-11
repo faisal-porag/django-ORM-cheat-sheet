@@ -179,7 +179,7 @@ class Question(models.Model):
 answers = Answer.objects.filter(question_id=1).select_related()
 ```
 
-// SUM 
+#### SUM ORM FORMAT
 ```shell
 from django.db.models import Sum
 
