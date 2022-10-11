@@ -163,10 +163,8 @@ SELECT * FROM members ORDER BY lastname ASC, id DESC;
 ```
 ---
 
-
-
-
-
+#### JOIN QUERY ORM EXAMPLE MODEL
+```shell
 class Question(models.Model):
       title = models.CharField(max_length=70)
       details = models.TextField()
@@ -174,17 +172,20 @@ class Question(models.Model):
     class Answer(models.Model):
       question = models.ForeignKey('Question')
       details = models.TextField()
-      
-//JOIN QUERY
-answers = Answer.objects.filter(question_id=1).select_related()
+```      
 
+#### JOIN QUERY
+```shell
+answers = Answer.objects.filter(question_id=1).select_related()
+```
 
 // SUM 
+```shell
 from django.db.models import Sum
 
 ItemPrice.objects.aggregate(Sum('price'))
 # returns {'price__sum': 1000} for example
-
+```
 
 ---
 
