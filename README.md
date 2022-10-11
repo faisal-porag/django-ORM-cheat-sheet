@@ -188,7 +188,34 @@ ItemPrice.objects.aggregate(Sum('price'))
 
 
 
+#### AND, OR CONDITION in ORM 
+You can combine multiple comma-separated `Q` objects to `.get()`, which will act like parenthesized `AND` clauses.
 
+```shell
+User.objects.get(
+  Q(income__gte=5000) | Q(income=0),
+  Q(email__endswith='gmail.com') | Q(email__endswith='yahoo.com')
+)
+```
+
+#### RAW SQL 
+```shell
+SELECT * FROM users
+
+WHERE (income >= 5000 OR income = 0)
+AND 
+(email LIKE '%gmail.com' OR email LIKE '%yahoo.com')
+```
+
+#### NOTE 
+If you combine `Q` clauses with keyword arguments, just make sure that the `Q` argument comes first:
+
+```shell
+User.objects.get(
+  Q(income__gte=5000) | Q(income=0),
+  email__endswith='gmail.com'
+)
+```
 
 
 
