@@ -169,9 +169,9 @@ class Question(models.Model):
       title = models.CharField(max_length=70)
       details = models.TextField()
 
-    class Answer(models.Model):
-      question = models.ForeignKey('Question')
-      details = models.TextField()
+class Answer(models.Model):
+     question = models.ForeignKey('Question')
+     details = models.TextField()
 ```      
 
 #### JOIN QUERY
