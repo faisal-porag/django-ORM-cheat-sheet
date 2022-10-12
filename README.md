@@ -216,6 +216,7 @@ User.objects.get(
   email__endswith='gmail.com'
 )
 ```
+---
 
 #### Avg, Max, Min, Sum, Count
 
@@ -230,11 +231,34 @@ User.objects.get(
 >>> Student.objects.all().aggregate(Sum('id'))   
 # {'id__sum': 55}  
 ```
+---
+
+#### ‘__isnull’ is used to filter the null values in the Django ORM. It accepts True or False.
+
+```shell
+>>> User.objects.filter(age__isnull=True).values('id','age')
+<QuerySet []>
+>>> User.objects.filter(age__isnull=False).values('id','age')
+<QuerySet [{'id': 1, 'age': 20}, {'id': 2, 'age': 25}, {'id': 3, 'age': 30}]>
+```
 
 
+#### The exists() method is used to check the result of the query. Returns True if the queryset contains any results, and False if not.
 
+```shell
+>>> User.objects.filter(age__isnull=True).values('id','age').exists()
+False
+>>> User.objects.filter(age__isnull=False).values('id','age').exists()
+True
+```
+---
 
+#### Excludes objects from the queryset which match with the lookup parameters.
 
+```shell
+>>> User.objects.exclude(id=1)
+<QuerySet [<User: User object (2)>, <User: User object (3)>]>
+```
 
 
 
