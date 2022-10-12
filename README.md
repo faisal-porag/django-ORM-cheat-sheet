@@ -217,7 +217,19 @@ User.objects.get(
 )
 ```
 
+#### Avg, Max, Min, Sum, Count
 
+```shell
+>>> from django.db.models import Avg, Max, Min, Sum, Count  
+>>> Student.objects.all().aggregate(Avg('id'))  
+# {'id__avg': 5.5}  
+>>> Student.objects.all().aggregate(Min('id'))    
+# {'id__min': 1}  
+>>> Student.objects.all().aggregate(Max('id'))   
+# {'id__max': 10}  
+>>> Student.objects.all().aggregate(Sum('id'))   
+# {'id__sum': 55}  
+```
 
 
 
