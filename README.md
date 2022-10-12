@@ -261,8 +261,26 @@ True
 ```
 
 
+---
 
+#### Simple or fancy UPSERT in PostgreSQL with Django >>>> Here's the basic version in "pure Django ORM":
 
+```shell
+if MissingSymbol.objects.filter(hash=hash_).exists():
+    MissingSymbol.objects.filter(hash=hash_).update(
+        count=F('count') + 1,
+        modified_at=timezone.now()
+    )
+else:
+    MissingSymbol.objects.create(
+        hash=hash_,
+        symbol=symbol,
+        debugid=debugid,
+        filename=filename,
+        code_file=code_file or None,
+        code_id=code_id or None,
+    )
+```
 
 
 
