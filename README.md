@@ -266,13 +266,13 @@ True
 #### Simple or fancy UPSERT in PostgreSQL with Django >>>> Here's the basic version in "pure Django ORM":
 
 ```shell
-if MissingSymbol.objects.filter(hash=hash_).exists():
-    MissingSymbol.objects.filter(hash=hash_).update(
+if UserModel.objects.filter(hash=hash_).exists():
+    UserModel.objects.filter(hash=hash_).update(
         count=F('count') + 1,
         modified_at=timezone.now()
     )
 else:
-    MissingSymbol.objects.create(
+    UserModel.objects.create(
         hash=hash_,
         symbol=symbol,
         debugid=debugid,
