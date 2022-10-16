@@ -281,6 +281,19 @@ else:
         code_id=code_id or None,
     )
 ```
+---
+
+#### with `select_related()`
+
+```shell
+entry = Entry.objects.select_related("blog").first()
+# SELECT "blog_entry"."id", ... "blog_blog"."id", ...
+# FROM "blog_entry"
+# INNER JOIN "blog_blog" ...;
+
+blog = entry.blog
+# no query is run because we JOINed with the blog table above
+```
 
 
 
