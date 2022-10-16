@@ -295,5 +295,32 @@ blog = entry.blog
 # no query is run because we JOINed with the blog table above
 ```
 
+--- 
+
+#### `CASE` and conditional logic 
+
+```shell
+entries = Entry.objects.annotate(
+    coolness=Case(
+        When(rating=5, then=Value("super cool")),
+        When(rating=4, then=Value("pretty cool")),
+        default=Value("not cool"),
+    )
+)
+# SELECT ...
+# CASE
+#   WHEN "blog_entry"."rating" = 5 THEN 'super cool'
+#   WHEN "blog_entry"."rating" = 4 THEN 'pretty cool'
+#   ELSE 'not cool'
+# END AS "coolness"
+# FROM "blog_entry" LIMIT 5;
+
+[f"Entry {e.pk} is {e.coolness}" for e in entries[:5]]
+# ['Entry 4137 is super cool',
+#  'Entry 4138 is not cool',
+#  'Entry 4139 is not cool',
+#  'Entry 4140 is pretty cool',
+#  'Entry 4141 is not cool']
+```
 
 
