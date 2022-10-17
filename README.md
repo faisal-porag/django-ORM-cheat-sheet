@@ -322,5 +322,13 @@ entries = Entry.objects.annotate(
 #  'Entry 4140 is pretty cool',
 #  'Entry 4141 is not cool']
 ```
+---
 
+#### Select data from table using Django ORM
+
+```shell
+queryset = ModelName.objects.all()
+print(queryset.query)
+print(list(queryset))
+```
 
