@@ -331,4 +331,22 @@ queryset = ModelName.objects.all()
 print(queryset.query)
 print(list(queryset))
 ```
+---
+
+#### Our first index
+###### We will now introduce a simple index with one field. Sure this field iscode0 :
+
+```shell
+class Student(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    code0 = models.CharField(max_length=100, blank=True)
+    code1 = models.CharField(max_length=100, blank=True)
+    code2 = models.CharField(max_length=100, blank=True)
+    code3 = models.CharField(max_length=100, blank=True)
+    code4 = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+        indexes = [models.Index(fields=['code0', ]), ]
+```
 
