@@ -350,3 +350,79 @@ class Student(models.Model):
         indexes = [models.Index(fields=['code0', ]), ]
 ```
 
+
+
+
+--- 
+
+#### DJANGO ORM EXAMPLES 
+
+###### CREATE MODEL
+
+```shell
+class Author(models.Model):
+    nickname = models.CharField(max_length=20, null=True, blank=True)
+    firstname = models.CharField(max_length=20)
+    lastname = models.CharField(max_length=40)
+    birth_date = models.DateField()
+class Book(models.Model):
+    author = models.ForeignKey(Author, related_name="books", on_delete=models.CASCADE)
+    title = models.CharField(unique=True, max_length=100)
+    category = models.CharField(max_length=50)
+    published = models.DateField()
+    price = models.DecimalField(decimal_places=2, max_digits=6)
+    rating = models.IntegerField()
+```
+
+###### range
+
+```shell
+start_date = datetime.date(2021, 1, 1)
+end_date = datetime.date(2021, 1, 3)
+books = Book.objects.filter(published__range=(start_date, end_date))
+```
+
+##### F expressions
+
+```shell
+from django.db.models import F
+# Query books published by authors under 30 years old (this is not exactly true because years vary in length)
+books = Book.objects.filter(published__lte=F("author__birth_date") + datetime.timedelta(days=365*30))
+```
+```shell
+from django.db.models import F
+book = Book.objects.get(title="Crime and Punishment")
+book.update(rating=F("rating") + 1)
+```
+
+##### Annotation
+
+```shell
+from django.db.models import F, Value as V
+from django.db.models.functions import Concat
+author = Author.objects.annotate(full_name=Concat(F("firstname"), V(" "), F("lastname")))
+```
+`or` 
+
+```shell
+from django.db.models import F
+from django.db.models.functions import Coalesce
+books = Author.objects.annotate(known_as=Coalesce(F("nickname"), F("firstname")))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
