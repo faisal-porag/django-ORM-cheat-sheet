@@ -419,7 +419,17 @@ books = Book.objects.annotate(author_age=F("published") - F("author__birth_date"
 books = Book.objects.annotate(rating_multiplied=F("rating") * 100)
 ```
 
+##### Aggregation
 
+```shell
+from django.db.models import Avg, Max, Min
+result = Book.objects.aggregate(Avg("price"))
+# {'price__avg': Decimal('13.50')}
+result = Book.objects.aggerate(Max("price"))
+# {'price__max: Decimal('13.50')}
+result = Book.objects.aggerate(Min("published"))
+# {'published__min': datetime.date(1866, 7, 25)}
+```
 
 
 
