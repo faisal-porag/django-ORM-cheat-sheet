@@ -410,7 +410,14 @@ from django.db.models.functions import Coalesce
 books = Author.objects.annotate(known_as=Coalesce(F("nickname"), F("firstname")))
 ```
 
+###### Using F expressions we can also do basic arithmetic to calculate the value for a dynamic field.
 
+```shell
+# Add  a new field with the authors age at the time of publishing the book
+books = Book.objects.annotate(author_age=F("published") - F("author__birth_date"))
+# Add a new field with the rating multiplied by 100
+books = Book.objects.annotate(rating_multiplied=F("rating") * 100)
+```
 
 
 
