@@ -430,7 +430,7 @@ books = Book.objects.annotate(rating_multiplied=F("rating") * 100)
 ##### Aggregation
 While annotate can be used to add new values to the returned data, aggregation can be used to derive values by summarizing or aggregating a result set. The difference between aggregation and annotation is that annotating adds a new field to every row of a result set and aggregating reduces the results into a single row with the aggregated values.
 
-Common uses for aggregation are counting, averaging, or finding maximum or minimum.
+`Common uses for aggregation are counting, averaging, or finding maximum or minimum.`
 
 ```shell
 from django.db.models import Avg, Max, Min
