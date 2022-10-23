@@ -396,12 +396,14 @@ book.update(rating=F("rating") + 1)
 ```
 
 ##### Annotation
+Most often we just want to query the values defined in a model with some filtering criteria. But sometimes you'll be calculating or combining values that you need from the result of the query. This can, of course, be done in Python but for performance reasons, it might be worth it to let the database handle the calculations. This is where Djangos annotations come in handy.
 
 ```shell
 from django.db.models import F, Value as V
 from django.db.models.functions import Concat
 author = Author.objects.annotate(full_name=Concat(F("firstname"), V(" "), F("lastname")))
 ```
+
 `or` 
 
 ```shell
@@ -410,7 +412,13 @@ from django.db.models.functions import Coalesce
 books = Author.objects.annotate(known_as=Coalesce(F("nickname"), F("firstname")))
 ```
 
-###### Using F expressions we can also do basic arithmetic to calculate the value for a dynamic field.
+Here, we are adding a new dynamic field full_name to our query results. It will contain a concatenation of the authors firstname and lastname done using the Concat function, F expressions, and Value.
+
+Concat is just one example of a database function available in Django. Database functions are a great way to add dynamic fields into our queries. Django supports a number of database functions like comparison and conversion functions (Coalesce, Greatest, ...), math functions (Power, Sqrt, Ceil, ...), text functions (Concat, Trim, Upper, ...), and window functions (FirstValue, NthValue, ...)
+
+Here's an example on how we can use Coalesce to get either the nickname or the firstname of a author.
+
+`Note: Using F expressions we can also do basic arithmetic to calculate the value for a dynamic field.`
 
 ```shell
 # Add  a new field with the authors age at the time of publishing the book
@@ -420,6 +428,9 @@ books = Book.objects.annotate(rating_multiplied=F("rating") * 100)
 ```
 
 ##### Aggregation
+While annotate can be used to add new values to the returned data, aggregation can be used to derive values by summarizing or aggregating a result set. The difference between aggregation and annotation is that annotating adds a new field to every row of a result set and aggregating reduces the results into a single row with the aggregated values.
+
+Common uses for aggregation are counting, averaging, or finding maximum or minimum.
 
 ```shell
 from django.db.models import Avg, Max, Min
@@ -429,6 +440,30 @@ result = Book.objects.aggerate(Max("price"))
 # {'price__max: Decimal('13.50')}
 result = Book.objects.aggerate(Min("published"))
 # {'published__min': datetime.date(1866, 7, 25)}
+```
+
+```sh
+# Calculate average prices for books in all categories.
+Book.objects.values("category").annotate(Avg("price"))
+# {'category': 'Historical fiction', 'price__avg': Decimal('13.9900000000000')}, {'category': 'Romance', 'price__avg': Decimal('16.4950000000000')}
+```
+
+```sh 
+from django.db.models import Count
+authors = Author.objects.annotate(num_books=Count("books"))
+```
+
+##### Case...When
+The last example I want to show is a bit more complex but showcases some of Djangos query features together. It includes using conditional expressions when calculating the value of a dynamic field.
+
+```sh 
+from django.db.models import F, Q, Value, When, Case
+from decimal import Decimal
+books = Book.objects.annotate(discounted_price=Case(
+    When(category="Romance", then=F("price") * Decimal(0.95)),
+    When(category="Historical fiction", then=F("price") * Decimal(0.8)),
+    default=None
+))
 ```
 
 
