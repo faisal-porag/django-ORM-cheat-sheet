@@ -1,7 +1,8 @@
 # Django-ORM-Queryset
 
 #### ORM Sample Filter Example
-Return only the records where the firstname is 'Emil':
+Return only the records where the firstname is `'Emil'`:
+
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values()
 ```
@@ -13,7 +14,8 @@ SELECT * FROM members WHERE firstname = 'Emil';
 ---
 
 #### ORM Sample Filter Example 2
-Return only the records where the firstname is 'Emil':
+Return only the records where the firstname is `'Emil'`:
+
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values(id, firstname, lastname)
 ```
@@ -25,7 +27,8 @@ SELECT id, firstname, lastname FROM members WHERE firstname = 'Emil';
 ---
 
 #### ORM `AND` Example
-Return records where lastname is "Refsnes" and id is 2:
+Return records where lastname is `"Refsnes"` and id is 2:
+
 ```shell
 mydata = Members.objects.filter(lastname='Refsnes', id=2).values()
 ```
@@ -37,7 +40,7 @@ SELECT * FROM members WHERE lastname='Refsnes' AND id = 2;
 ---
 
 #### ORM `OR` Example
-Return records where firstname is either "Emil" or Tobias":
+Return records where firstname is either `Emil` or `Tobias`:
 ```shell
 mydata = Members.objects.filter(firstname='Emil').values() | Members.objects.filter(firstname='Tobias').values()
 ```
