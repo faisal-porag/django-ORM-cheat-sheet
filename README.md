@@ -481,3 +481,5 @@ books = Book.objects.annotate(discounted_price=Case(
 
 
 
+
+
