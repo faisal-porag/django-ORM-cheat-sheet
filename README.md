@@ -503,6 +503,31 @@ Entry.objects.values('pub_date__year').annotate(
  )
  ```
 
+##### has_keys
+Returns objects where all of the given keys are in the top-level of the data. For example:
+
+```sh 
+Dog.objects.create(name='Rufus', data={'breed': 'labrador'})
+<Dog: Rufus>
+Dog.objects.create(name='Meg', data={'breed': 'collie', 'owner': 'Bob'})
+<Dog: Meg>
+Dog.objects.filter(data__has_keys=['breed', 'owner'])
+<QuerySet [<Dog: Meg>]>
+```
+
+##### has_any_keys
+Returns objects where any of the given keys are in the top-level of the data. For example:
+
+```sh
+Dog.objects.create(name='Rufus', data={'breed': 'labrador'})
+<Dog: Rufus>
+Dog.objects.create(name='Meg', data={'owner': 'Bob'})
+<Dog: Meg>
+Dog.objects.filter(data__has_any_keys=['owner', 'breed'])
+<QuerySet [<Dog: Rufus>, <Dog: Meg>]>
+```
+
+
 
 
 
