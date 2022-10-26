@@ -470,6 +470,37 @@ books = Book.objects.annotate(discounted_price=Case(
 ```
 
 
+--- 
+##### SUB QUERY ORM 
+```sh
+Blog.objects.exclude(
+    entry__in=Entry.objects.filter(
+        headline__contains='Lennon',
+        pub_date__year=2008,
+    ),
+)
+```
+
+##### ADD 3 DAYS 
+```sh 
+from datetime import timedelta
+Entry.objects.filter(mod_date__gt=F('pub_date') + timedelta(days=3))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
