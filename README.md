@@ -471,7 +471,7 @@ books = Book.objects.annotate(discounted_price=Case(
 
 
 --- 
-##### SUB QUERY ORM 
+##### SUBQUERY ORM 
 ```sh
 Blog.objects.exclude(
     entry__in=Entry.objects.filter(
@@ -487,10 +487,21 @@ from datetime import timedelta
 Entry.objects.filter(mod_date__gt=F('pub_date') + timedelta(days=3))
 ```
 
+ --- 
+ 
+##### SUBQUERY ORM 
 
-
-
-
+```sh 
+from django.db.models import OuterRef, Subquery, Sum
+Entry.objects.values('pub_date__year').annotate(
+    top_rating=Subquery(
+        Entry.objects.filter(
+            pub_date__year=OuterRef('pub_date__year'),
+        ).order_by('-rating').values('rating')[:1]
+    ),
+     total_comments=Sum('number_of_comments'),
+ )
+ ```
 
 
 
