@@ -527,6 +527,12 @@ Dog.objects.filter(data__has_any_keys=['owner', 'breed'])
 <QuerySet [<Dog: Rufus>, <Dog: Meg>]>
 ```
 
+---
+##### JOIN QUERY ORM 
+```sh
+answers = Answer.objects.filter(question_id=1).select_related() 
+a1 = Article.objects.select_related('reporter')
+```
 
 
 
