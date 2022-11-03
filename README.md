@@ -534,7 +534,13 @@ answers = Answer.objects.filter(question_id=1).select_related()
 a1 = Article.objects.select_related('reporter')
 ```
 
+---
 
+```sh 
+>>> records = User.objects.filter(first_name__in=[item['first_name'] for item in duplicates])
+>>> print([item.id for item in records])
+[2, 11, 13]
+```
 
 
 
