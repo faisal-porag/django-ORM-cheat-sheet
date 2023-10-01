@@ -544,7 +544,9 @@ a1 = Article.objects.select_related('reporter')
 
 
 
+---
 
+Thanks 
 
 
 
